@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (I)[Ljava/lang/String;
  */
 JNIEXPORT void JNICALL Java_org_viar_core_CameraProcessor_init
-  (JNIEnv *, jobject, jint);
+  (JNIEnv *, jobject, jint, jboolean);
 
 JNIEXPORT jobjectArray JNICALL Java_org_viar_core_CameraProcessor_processFrame
   (JNIEnv *, jobject, jint);

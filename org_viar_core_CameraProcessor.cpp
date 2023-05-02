@@ -4,6 +4,7 @@
 #include <opencv2/core.hpp>
 #include "opencv2/highgui.hpp"
 #include "opencv2/aruco.hpp"
+#include <opencv2/mcc.hpp>
 
 using namespace std;
 using namespace cv;
@@ -12,11 +13,13 @@ using namespace cv::aruco;
 vector<VideoCapture*> cameras;
 
 cv::Ptr<cv::aruco::Dictionary> dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_4X4_100);
+cv::Ptr<DetectorParameters> parameters = DetectorParameters::create();
 
 
-JNIEXPORT void JNICALL Java_org_viar_core_CameraProcessor_init (JNIEnv* env, jobject instance, jint cameraCount) {
-
-    for (int cameraId = 0; cameraId < cameraCount; cameraId++) {
+JNIEXPORT void JNICALL Java_org_viar_core_CameraProcessor_init (JNIEnv* env, jobject instance, jint cameraCount, jboolean serialCameraSelection) {
+    for (int cameraId = 0; 
+        serialCameraSelection ? cameraId < cameraCount : cameras.size() < cameraCount; 
+        cameraId++) {
         VideoCapture* camera = new VideoCapture(cameraId);
         camera->set(CAP_PROP_FRAME_WIDTH, 1920);
         camera->set(CAP_PROP_FRAME_HEIGHT, 1080);
@@ -28,6 +31,8 @@ JNIEXPORT void JNICALL Java_org_viar_core_CameraProcessor_init (JNIEnv* env, job
             camera->release();
         }
     }
+    parameters->maxErroneousBitsInBorderRate = 0.35;
+    
 }
 
 JNIEXPORT jobjectArray JNICALL Java_org_viar_core_CameraProcessor_processFrame (JNIEnv* env, jobject instance, jint cameraId) {
@@ -45,7 +50,7 @@ JNIEXPORT jobjectArray JNICALL Java_org_viar_core_CameraProcessor_processFrame (
     vector<int> markerIds;
     vector<vector<Point2f>> markerCorners;
 
-    detectMarkers(frame, dictionary, markerCorners, markerIds);
+    detectMarkers(frame, dictionary, markerCorners, markerIds, parameters);
 
     if (markerIds.empty()) {
         return NULL;
