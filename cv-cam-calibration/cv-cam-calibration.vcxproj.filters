@@ -15,7 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cv-cam-calibration.cpp">
+    <ClCompile Include="detector-test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="generate-aruco-markers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ArucoDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\BodyPoseDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

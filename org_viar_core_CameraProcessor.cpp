@@ -5,6 +5,7 @@
 #include "opencv2/highgui.hpp"
 #include "opencv2/aruco.hpp"
 #include <opencv2/mcc.hpp>
+#include "Detector.h"
 
 using namespace std;
 using namespace cv;
@@ -15,6 +16,7 @@ vector<VideoCapture*> cameras;
 cv::Ptr<cv::aruco::Dictionary> dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_4X4_100);
 cv::Ptr<DetectorParameters> parameters = DetectorParameters::create();
 
+Detector detector = Detector();
 
 JNIEXPORT void JNICALL Java_org_viar_core_CameraProcessor_init (JNIEnv* env, jobject instance, jint cameraCount, jboolean serialCameraSelection) {
     for (int cameraId = 0; 
@@ -40,7 +42,6 @@ JNIEXPORT jobjectArray JNICALL Java_org_viar_core_CameraProcessor_processFrame (
     VideoCapture* camera = cameras.at(cameraId);
     
     if (!camera->isOpened()) {
-        //std::cerr << "ERROR: Could not open camera " << cameraId << std::endl;
         return NULL;
     }
 

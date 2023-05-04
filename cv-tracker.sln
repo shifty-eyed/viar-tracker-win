@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cv-tracker", "cv-tracker.vcxproj", "{B56783B3-FDB0-4FA6-AF3A-CC6716D8B088}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cv-cam-calibration", "cv-cam-calibration\cv-cam-calibration.vcxproj", "{6486BD1B-CFD8-41F1-A8CE-0E05225149CF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B56783B3-FDB0-4FA6-AF3A-CC6716D8B088} = {B56783B3-FDB0-4FA6-AF3A-CC6716D8B088}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

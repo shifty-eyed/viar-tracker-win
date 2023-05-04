@@ -145,10 +145,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArucoDetector.cpp" />
+    <ClCompile Include="BodyPoseDetector.cpp" />
     <ClCompile Include="cv-tracker.cpp" />
     <ClCompile Include="org_viar_core_CameraProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArucoDetector.h" />
+    <ClInclude Include="BodyPoseDetector.h" />
+    <ClInclude Include="Detector.h" />
     <ClInclude Include="org_viar_core_CameraProcessor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

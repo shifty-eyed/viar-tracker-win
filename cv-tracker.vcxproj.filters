@@ -21,9 +21,24 @@
     <ClCompile Include="org_viar_core_CameraProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ArucoDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BodyPoseDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="org_viar_core_CameraProcessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Detector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArucoDetector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BodyPoseDetector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

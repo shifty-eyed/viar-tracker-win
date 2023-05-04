@@ -143,10 +143,19 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opencv_world460.lib;opencv_xfeatures2d460.lib;opencv_ximgproc460.lib;opencv_xobjdetect460.lib;opencv_aruco460.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\ws\cv-tracker\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cv-cam-calibration.cpp" />
+    <ClCompile Include="..\ArucoDetector.cpp" />
+    <ClCompile Include="..\BodyPoseDetector.cpp" />
+    <ClCompile Include="detector-test.cpp" />
+    <ClCompile Include="generate-aruco-markers.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cv-tracker.vcxproj">
+      <Project>{b56783b3-fdb0-4fa6-af3a-cc6716d8b088}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
