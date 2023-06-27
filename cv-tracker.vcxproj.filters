@@ -21,10 +21,16 @@
     <ClCompile Include="org_viar_core_CameraProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ArucoDetector.cpp">
+    <ClCompile Include="MyArucoDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BodyPoseDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JsonSerializer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stopwatch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,13 +38,19 @@
     <ClInclude Include="org_viar_core_CameraProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Detector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ArucoDetector.h">
+    <ClInclude Include="MyArucoDetector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BodyPoseDetector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonSerializer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stopwatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

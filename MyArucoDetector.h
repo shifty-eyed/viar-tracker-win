@@ -13,10 +13,10 @@ struct ArucoMarkerPosition {
 	Point2f corners[4];
 };
 
-class ArucoDetector 
+class MyArucoDetector 
 {
 public:
-    ArucoDetector();
+    MyArucoDetector();
 
     virtual void detect(Mat image, vector<ArucoMarkerPosition>& result);
 private:

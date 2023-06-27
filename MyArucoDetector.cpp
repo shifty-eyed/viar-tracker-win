@@ -1,4 +1,4 @@
-#include "ArucoDetector.h"
+#include "MyArucoDetector.h"
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/core.hpp>
@@ -10,18 +10,18 @@ using namespace std;
 using namespace cv;
 using namespace cv::aruco;
 
-ArucoDetector::ArucoDetector()
+MyArucoDetector::MyArucoDetector()
 {
-	dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_4X4_100);
-	parameters = DetectorParameters::create();
+	dictionary = makePtr<Dictionary>(cv::aruco::getPredefinedDictionary(cv::aruco::DICT_4X4_100));
+	//parameters = makePtr<DetectorParameters>;
 }
 
-void ArucoDetector::detect(Mat image, vector<ArucoMarkerPosition>& result)
+void MyArucoDetector::detect(Mat image, vector<ArucoMarkerPosition>& result)
 {
     vector<int> markerIds;
     vector<vector<Point2f>> markerCorners;
 
-    detectMarkers(image, dictionary, markerCorners, markerIds, parameters);
+    detectMarkers(image, dictionary, markerCorners, markerIds);
 
     if (markerIds.empty()) {
         return;
