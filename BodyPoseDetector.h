@@ -16,7 +16,7 @@ using namespace std;
 #define USE_GPU true
 
 
-struct BodyPartPosition {
+struct BodyPose {
 	int id;
 	vector<Point> points;
 };
@@ -31,6 +31,6 @@ public:
 
 	BodyPoseDetector() : BodyPoseDetector(NET_BIN_FILE, NET_TXT_FILE, USE_GPU) {};
 
-	virtual string detect(Mat image, vector<BodyPartPosition>& result);
+	virtual string detect(Mat image, vector<BodyPose>& result);
 };
 

@@ -13,8 +13,6 @@
 #include "../MyArucoDetector.h"
 #include "../BodyPoseDetector.h"
 
-#include "../Stopwatch.h"
-
 using namespace std;
 using namespace cv;
 
@@ -42,10 +40,10 @@ const int POSE_PAIRS[NUM_PAIRS][2] = {   // COCO body
 int doMagic(Mat &src, Mat& dst) {
 
     vector<ArucoMarkerPosition> arucos;
-    vector<BodyPartPosition> bodyParts;
+    vector<BodyPose> bodies;
 
     arucoDetector.detect(src, arucos);
-    string metrics = bodyDetector.detect(src, bodyParts);
+    string metrics = bodyDetector.detect(src, bodies);
 
     src.copyTo(dst);
 
@@ -60,20 +58,14 @@ int doMagic(Mat &src, Mat& dst) {
     }
 
 
-    for (BodyPartPosition body : bodyParts) {
-        for (int n = 0; n < NUM_PAIRS; n++)
-        {
-            // lookup 2 connected body/hand parts
-            Point2f a = body.points[POSE_PAIRS[n][0]];
-            Point2f b = body.points[POSE_PAIRS[n][1]];
-
-            // we did not find enough confidence before
-            if (a.x <= 0 || a.y <= 0 || b.x <= 0 || b.y <= 0)
-                continue;
-
-            line(dst, a, b, BLUE, 2);
-            circle(dst, a, 3, RED, -1);
-            circle(dst, b, 3, RED, -1);
+    //dro
+    for (BodyPose body : bodies) {
+        for (int n = 0; n < body.points.size(); n++ ) {
+            Point2f p = body.points[n];
+            if (p.x > 0 && p.y > 0) {
+                circle(dst, p, 3, RED, 1);
+                putText(dst, to_string(n), p, FONT_HERSHEY_SIMPLEX, 0.8f, BLUE, 2);
+            }
         }
     }
 

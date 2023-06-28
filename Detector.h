@@ -14,7 +14,7 @@ using namespace std;
 class Detector
 {
 public:
-	string detectFeaturePositions(Mat image, vector<ArucoMarkerPosition>& aruco, vector<BodyPartPosition>& body) {
+	string detectFeaturePositions(Mat image, vector<ArucoMarkerPosition>& aruco, vector<BodyPose>& body) {
 		arucoDetector.detect(image, aruco);
 		return bodyDetector.detect(image, body);
 	}

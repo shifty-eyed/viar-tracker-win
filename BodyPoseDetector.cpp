@@ -2,7 +2,6 @@
 #include <opencv2/highgui.hpp>
 
 #include <iostream>
-#include <chrono>
 
 #include "Stopwatch.h"
 #include "BodyPoseDetector.h"
@@ -21,7 +20,7 @@ BodyPoseDetector::BodyPoseDetector(String modelBin, String modelTxt, bool useGPU
     }
 }
 
-string BodyPoseDetector::detect(Mat image, vector<BodyPartPosition>& result)
+string BodyPoseDetector::detect(Mat image, vector<BodyPose>& result)
 {
     Stopwatch sw;
 
@@ -50,11 +49,11 @@ string BodyPoseDetector::detect(Mat image, vector<BodyPartPosition>& result)
         // Slice heatmap of corresponding body's part.
         Mat heatMap(H, W, CV_32F, out.ptr(0, n));
         // 1 maximum per heatmap
-        Point p(-1, -1), pm;
-        double conf;
-        minMaxLoc(heatMap, 0, &conf, 0, &pm);
-        if (conf > THRESHOLD)
-            p = pm;
+        Point p(-1, -1), maxPointLocation;
+        double maxValue;
+        minMaxLoc(heatMap, 0, &maxValue, 0, &maxPointLocation);
+        if (maxValue > THRESHOLD)
+            p = maxPointLocation;
         p.x *= SX;
         p.y *= SY;
         points[n] = p;
@@ -62,7 +61,7 @@ string BodyPoseDetector::detect(Mat image, vector<BodyPartPosition>& result)
     stringstream msg;
     msg << "Heatmap: " << W << "x" << H;
 
-    putText(image, msg.str(), Point(30, 70), FONT_HERSHEY_SIMPLEX, 0.5f, RED, 1);
+    putText(image, msg.str(), Point(30, 60), FONT_HERSHEY_SIMPLEX, 0.5f, RED, 1);
 
     sw.stop("heatmap");
     result.push_back({0, points});

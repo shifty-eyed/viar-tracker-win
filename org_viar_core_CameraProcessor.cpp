@@ -46,7 +46,7 @@ JNIEXPORT jobjectArray JNICALL Java_org_viar_core_CameraProcessor_processFrame (
     *camera >> frame;
 
     vector<ArucoMarkerPosition> arucos;
-    vector<BodyPartPosition> bodyParts;
+    vector<BodyPose> bodyParts;
 
     detector.detectFeaturePositions(frame, arucos, bodyParts);
 
