@@ -10,6 +10,8 @@ struct TrackerNodeConfig {
 	string serverHost;
 	int serverPort;
 	int numCameras;
+	int frameWidth;
+	int frameHeight;
 	vector<string> cameraNames;
 
 };

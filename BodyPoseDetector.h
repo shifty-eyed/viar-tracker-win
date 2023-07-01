@@ -13,7 +13,7 @@ using namespace std;
 
 #define NET_BIN_FILE "e:/downloads/dev/openpos-models/graph_opt_thin.pb"
 #define NET_TXT_FILE "e:/downloads/dev/openpos-models/graph_opt_thin.pbtxt"
-#define USE_GPU true
+#define USE_GPU false
 
 
 struct BodyPose {

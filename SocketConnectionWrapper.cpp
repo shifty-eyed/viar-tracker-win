@@ -54,7 +54,7 @@ bool SocketConnectionWrapper::sendMessage(string message) {
 
 string SocketConnectionWrapper::receiveMessage()
 {
-    char buffer[4096];
+    char buffer[1024];
     memset(buffer, 0, sizeof(buffer));
     if (recv(clientSocket, buffer, sizeof(buffer) - 1, 0) == SOCKET_ERROR) {
         lastError = "Failed to receive data from the server\n";
