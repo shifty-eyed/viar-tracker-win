@@ -8,6 +8,8 @@
 #pragma comment(lib, "ws2_32.lib")
 
 
+#define SOCKET_ERROR_STRING "__SOCKET_ERROR__"
+
 class SocketConnectionWrapper {
 public:
 	bool init(TrackerNodeConfig config);

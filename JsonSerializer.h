@@ -9,7 +9,7 @@
 class JsonSerializer {
 
 public: 
-	void clear() { buffer.clear(); }
+	void clear() { buffer.str(""); buffer.clear(); }
 	string toString() { return buffer.str(); };
 
 	void addCapture(string cameraName, vector<ArucoMarkerPosition> arucos, vector<BodyPose> bodies);

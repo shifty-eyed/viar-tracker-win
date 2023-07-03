@@ -1,12 +1,13 @@
 
 #include <iostream>
 #include <fstream> 
-#include <filesystem> 
 #include <math.h>
 #include <stdio.h>
 
 #include "Utils.h"
 #include "SocketConnectionWrapper.h"
+#include <chrono>
+#include <thread>
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/core.hpp>
@@ -53,6 +54,12 @@ bool initCameras() {
     return true;
 }
 
+void closeCameras() {
+    for (VideoCapture c: cameras) {
+        c.release();
+    }
+}
+
 void processCaptures() {
     Mat image;
     vector<ArucoMarkerPosition> arucos;
@@ -73,42 +80,52 @@ void processCaptures() {
 
 int main(int argc, char* argv[]) {
 	parseConfig();
-    if (!connection.init(config)) {
-        cerr << connection.getLastError();
-        return 1;
-    }
-    if (!initCameras()) {
-        return 1;
-    }
 
-    clock_t t = clock();
-    int frameCount = 0;
-    int fps = 0;
     while (1) {
-
-        string msg = connection.receiveMessage();
-        if (msg == "end") {
-            cerr << "Received terminated message: " << msg;
-            break;
-        };
-        
-
-        frameCount++;
-        serializer.clear();
-        processCaptures();
-
-        connection.sendMessage("begin\n");
-        connection.sendMessage(serializer.toString());
-        connection.sendMessage("end\n");
-
-        if (clock() - t > CLOCKS_PER_SEC) {
-            t = clock();
-            fps = frameCount;
-            printf("fps: %d\n", fps);
-            frameCount = 0;
+        if (!connection.init(config)) {
+            cerr << connection.getLastError() << "Retry in 5 sec...\n";
+            this_thread::sleep_for(chrono::milliseconds(5000));
+            continue;
+        }
+        if (!initCameras()) {
+            return 1;
         }
 
+        clock_t t = clock();
+        int frameCount = 0;
+        int fps = 0;
+        while (1) {
+            string msg = connection.receiveMessage();
+            if (msg == "shutdown") {
+                cout << "Received command to terminate.";
+                connection.sendMessage("close\n");
+                closeCameras();
+                connection.close();
+                return 0;
+            };
+            if (msg == SOCKET_ERROR_STRING) {
+                cerr << "Connection interrupted: " << connection.getLastError();
+                break;
+            };
+
+            frameCount++;
+            serializer.clear();
+            processCaptures();
+
+            connection.sendMessage("begin\n");
+            connection.sendMessage(serializer.toString());
+            connection.sendMessage("end\n");
+
+            if (clock() - t > CLOCKS_PER_SEC) {
+                t = clock();
+                fps = frameCount;
+                printf("fps: %d\n", fps);
+                frameCount = 0;
+            }
+
+        }
+        closeCameras();
+        connection.close();
     }
-    connection.close();
     return 0;
 }

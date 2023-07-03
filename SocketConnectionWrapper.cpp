@@ -59,7 +59,7 @@ string SocketConnectionWrapper::receiveMessage()
     if (recv(clientSocket, buffer, sizeof(buffer) - 1, 0) == SOCKET_ERROR) {
         lastError = "Failed to receive data from the server\n";
         close();
-        return string();
+        return SOCKET_ERROR_STRING;
     }
 	return string(buffer);
 }
