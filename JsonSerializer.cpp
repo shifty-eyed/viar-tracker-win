@@ -36,7 +36,7 @@ void JsonSerializer::addArucoMarkerPosition(ArucoMarkerPosition data) {
 			buffer << ",";
 		}
 	}
-	buffer << "],";
+	buffer << "]";
 	buffer << "}";
 }
 
