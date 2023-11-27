@@ -26,7 +26,7 @@ using namespace cv;
 #define EXPECTED_DETECTION_HITS 1
 int actualDetectedHits = 0;
 MyArucoDetector arucoDetector = MyArucoDetector();
-BodyPoseDetector bodyDetector = BodyPoseDetector();
+//BodyPoseDetector bodyDetector = BodyPoseDetector();
 
 const int POSE_PAIRS[NUM_PAIRS][2] = {   // COCO body
     {1,2}, {1,5}, {2,3},
@@ -43,7 +43,7 @@ int doMagic(Mat &src, Mat& dst) {
     vector<BodyPose> bodies;
 
     arucoDetector.detect(src, arucos);
-    string metrics = bodyDetector.detect(src, bodies);
+    //string metrics = bodyDetector.detect(src, bodies);
 
     src.copyTo(dst);
 
@@ -69,7 +69,7 @@ int doMagic(Mat &src, Mat& dst) {
         }
     }
 
-    putText(dst, metrics, Point(30, 30), FONT_HERSHEY_SIMPLEX, 0.5f, YELLOW, 1);
+    //putText(dst, metrics, Point(30, 30), FONT_HERSHEY_SIMPLEX, 0.5f, YELLOW, 1);
 
     return arucos.size();
 }
@@ -81,6 +81,7 @@ int main(int argc, char* argv[]) {
     cout << "opening cam " << camId << std::endl;
 
     VideoCapture camera(camId, CAP_DSHOW);
+    
     //camera.set(CAP_PROP_FRAME_WIDTH, 1920); camera.set(CAP_PROP_FRAME_HEIGHT, 1080);
     camera.set(CAP_PROP_FRAME_WIDTH, 1280); camera.set(CAP_PROP_FRAME_HEIGHT, 720);
 

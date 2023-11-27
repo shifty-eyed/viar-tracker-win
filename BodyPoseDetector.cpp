@@ -20,6 +20,8 @@ BodyPoseDetector::BodyPoseDetector(String modelBin, String modelTxt, bool useGPU
     }
 }
 
+
+//TODO: improve and refactor
 string BodyPoseDetector::detect(Mat image, vector<BodyPose>& result)
 {
     Stopwatch sw;

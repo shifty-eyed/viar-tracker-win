@@ -19,7 +19,7 @@ long Stopwatch::measure(string name)
     if (metrics.find(name) == metrics.end()) {
         return -1;
     }
-    long duration = chrono::duration_cast<std::chrono::milliseconds>(chrono::high_resolution_clock::now() - metrics[name]).count();
+    long duration = (long)chrono::duration_cast<std::chrono::milliseconds>(chrono::high_resolution_clock::now() - metrics[name]).count();
     metrics.erase(name);
     return duration;
 }

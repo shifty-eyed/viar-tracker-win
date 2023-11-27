@@ -18,9 +18,6 @@
     <ClCompile Include="cv-tracker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="org_viar_core_CameraProcessor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MyArucoDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -38,9 +35,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="org_viar_core_CameraProcessor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MyArucoDetector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
